@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 function Form() {
-  const [firstName, setFirstName] = useState("John");
-  const [lastName, setLastName] = useState("Henry");
+  const [firstName, setFirstName] = useState("Jakes");
+  const [lastName, setLastName] = useState("Aviela");
   const [submittedData, setSubmittedData] = useState([]);
   const [errors, setErrors] = useState([]);
 
@@ -16,17 +16,16 @@ function Form() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // first name is required
     if (firstName.length > 0) {
-      const formData = { firstName: firstName, lastName: lastName };
-      const dataArray = [...submittedData, formData];
-      setSubmittedData(dataArray);
-      setFirstName("");
-      setLastName("");
-      setErrors([]);
-    } else {
-      setErrors(["First name is required!"]);
-    }
+    const formData = { firstName: firstName, lastName: lastName };
+    const dataArray = [...submittedData, formData];
+    setSubmittedData(dataArray);
+    setFirstName("");
+    setLastName("");
+    setErrors([]);
+  } else {
+    setErrors(["First name is a requirement!"]);
+  }
   }
 
   const listOfSubmissions = submittedData.map((data, index) => {
@@ -39,22 +38,21 @@ function Form() {
 
   return (
     <div>
-    <form onSubmit={handleSubmit}>
-      <input type="text" onChange={handleFirstNameChange} value={firstName} />
-      <input type="text" onChange={handleLastNameChange} value={lastName} />
-      <button type="submit">Submit</button>
-    </form>
-    {/* conditionally render error messages */}
-    {errors.length > 0
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={handleFirstNameChange} value={firstName} />
+        <input type="text" onChange={handleLastNameChange} value={lastName} />
+        <button type="submit">Submit</button>
+      </form>
+      {errors.length > 0
       ? errors.map((error, index) => (
-          <p key={index} style={{ color: "red" }}>
+          <p key={index} style={{ color: "blue" }}>
             {error}
           </p>
         ))
       : null}
-    <h3>Submissions</h3>
-    {listOfSubmissions}
-  </div>
+      <h3>Submissions</h3>
+      {listOfSubmissions}
+   </div>
   );
 }
 
